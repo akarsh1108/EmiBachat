@@ -542,7 +542,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
       <section id="articles" className="p-10 bg-gray-50">
         <h2 className="text-2xl font-bold mb-2">Articles / Media</h2>
         {isClient && <AnimatedTestimonials testimonials={testimonials} />}
