@@ -117,13 +117,12 @@ export default function Home() {
             </div>
           ))}
         </div>
-
         {/* Text and Buttons */}
-        <div className="relative p-5 sm:p-10 rounded z-10 text-center max-w-lg text-white">
-          <h1 className="text-2xl sm:text-4xl font-bold mb-4">
+        <div className="relative p-5 sm:p-10 rounded z-10 text-center max-w-full sm:max-w-lg text-white">
+          <h1 className="text-xl sm:text-4xl font-bold mb-4">
             {slides[currentSlide]?.text}
           </h1>
-          <div className="flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-5 justify-center">
+          <div className="flex flex-wrap gap-3 sm:space-y-0 sm:space-x-5 justify-center">
             <button className="px-4 py-2 sm:px-5 sm:py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
               Login
             </button>
