@@ -269,6 +269,7 @@
 //   );
 // }
 "use client";
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
@@ -587,20 +588,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="p-5 bg-gray-100 flex justify-between items-center">
-        <p>@2024</p>
-        <div className="space-x-5">
-          <a href="https://instagram.com" className="hover:text-blue-500">
-            Instagram
-          </a>
-          <a href="https://facebook.com" className="hover:text-blue-500">
-            Facebook
-          </a>
-          <a href="https://twitter.com" className="hover:text-blue-500">
-            Twitter
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

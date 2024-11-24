@@ -4,16 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
   });
 
-  const handleInputChange = (e: {
-    target: { name: string; value: string };
-  }) => {
+  const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -42,25 +39,6 @@ export default function RegisterForm() {
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
           Create an Account
         </h1>
-
-        {/* Username Field */}
-        <div className="flex flex-col">
-          <label
-            htmlFor="username"
-            className="text-sm font-semibold text-gray-700 mb-2"
-          >
-            Username
-          </label>
-          <Input
-            id="username"
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-            placeholder="Enter your username"
-            className="p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
-        </div>
 
         {/* Email Field */}
         <div className="flex flex-col">
@@ -96,23 +74,6 @@ export default function RegisterForm() {
             value={formData.password}
             onChange={handleInputChange}
             placeholder="Enter your password"
-            className="p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label
-            htmlFor="cpassword"
-            className="text-sm font-semibold text-gray-700 mb-2"
-          >
-            Confirm Password
-          </label>
-          <Input
-            id="Cpassword"
-            type="cpassword"
-            name="cpassword"
-            value={formData.password}
-            onChange={handleInputChange}
-            placeholder="Re Enter your password"
             className="p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
         </div>
