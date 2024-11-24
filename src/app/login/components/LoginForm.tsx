@@ -10,7 +10,9 @@ export default function LoginForm() {
     password: "",
   });
 
-  const handleInputChange = (e: { target: { name: any; value: any } }) => {
+  const handleInputChange = (e: {
+    target: { name: string; value: string };
+  }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -83,13 +85,13 @@ export default function LoginForm() {
           type="submit"
           className="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all"
         >
-          Register
+          Login
         </Button>
 
         <p className="text-sm text-center text-gray-500 mt-4">
-          Already have an account?{" "}
-          <a href="/login" className="text-blue-500 hover:underline">
-            Log in
+          Don't have an account?{" "}
+          <a href="/register" className="text-blue-500 hover:underline">
+            Register
           </a>
         </p>
       </form>
