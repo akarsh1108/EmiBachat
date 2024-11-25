@@ -271,7 +271,6 @@
 "use client";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import {
   IconArrowWaveRightUp,
@@ -285,58 +284,58 @@ import {
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  const slides = [
-    {
-      image: "/images/home/img1.jpg",
-      text: "Lorem Ipsum is simply dummy text",
-    },
-    {
-      image: "/images/home/img2.jpg",
-      text: "The quick brown fox jumps over the lazy dog",
-    },
-    {
-      image: "/images/home/img3.jpg",
-      text: "Innovate your ideas into reality",
-    },
-  ];
+  // const slides = [
+  //   {
+  //     image: "/images/home/img1.jpg",
+  //     text: "Lorem Ipsum is simply dummy text",
+  //   },
+  //   {
+  //     image: "/images/home/img2.jpg",
+  //     text: "The quick brown fox jumps over the lazy dog",
+  //   },
+  //   {
+  //     image: "/images/home/img3.jpg",
+  //     text: "Innovate your ideas into reality",
+  //   },
+  // ];
 
-  const testimonials = [
-    {
-      quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-      // name: "Sarah Chen",
-      // designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-      // name: "Michael Rodriguez",
-      // designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-      // name: "Emily Watson",
-      // designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-      // name: "James Kim",
-      // designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      // name: "Lisa Thompson",
-      // designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  // const testimonials = [
+  //   {
+  //     quote:
+  //       "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+  //     // name: "Sarah Chen",
+  //     // designation: "Product Manager at TechFlow",
+  //     src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     quote:
+  //       "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+  //     // name: "Michael Rodriguez",
+  //     // designation: "CTO at InnovateSphere",
+  //     src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     quote:
+  //       "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+  //     // name: "Emily Watson",
+  //     // designation: "Operations Director at CloudScale",
+  //     src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     quote:
+  //       "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+  //     // name: "James Kim",
+  //     // designation: "Engineering Lead at DataPro",
+  //     src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     quote:
+  //       "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
+  //     // name: "Lisa Thompson",
+  //     // designation: "VP of Technology at FutureNet",
+  //     src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  // ];
 
   const items = [
     {
@@ -426,20 +425,48 @@ export default function Home() {
     },
   ];
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-  console.log(currentSlide);
-  const [isClient, setIsClient] = useState(false);
+  const cards = [
+    {
+      title: "The Dawn of Innovation",
+      description: "Explore the birth of groundbreaking ideas and inventions.",
+      image: "/images/home/img1.jpg",
+    },
+    {
+      title: "The Digital Revolution",
+      description: "Dive into the transformative power of technology.",
+      image: "/images/home/img2.jpg",
+    },
+    {
+      title: "The Art of Design",
+      description: "Discover the beauty of thoughtful and functional design.",
+      image: "/images/home/img3.jpg",
+    },
+    {
+      title: "The Joy of Creation",
+      description: "Experience the thrill of bringing ideas to life.",
+      image: "/images/home/img1.jpg",
+    },
+    {
+      title: "The Spirit of Adventure",
+      description: "Embark on exciting journeys and thrilling discoveries.",
+      image: "/images/home/img2.jpg",
+    },
+  ];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleNext = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  };
 
-  // Ensure `useEffect` is used for client-side-only logic
+  const handlePrev = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? cards.length - 1 : prevIndex - 1
+    );
+  };
+
   useEffect(() => {
-    setIsClient(true);
-
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [slides.length]);
+    const interval = setInterval(handleNext, 5000); // Automatically shift every 5 seconds
+    return () => clearInterval(interval); // Cleanup the interval
+  }, []);
 
   // Function to manually change slides
   // const goToNextSlide = () => {
@@ -454,10 +481,40 @@ export default function Home() {
     <div>
       <Navbar />
       {/* Hero Section */}
-      <section id="how-it-works" className="p-10 bg-[#EFF3F7]">
-        {isClient && <AnimatedTestimonials testimonials={testimonials} />}
-      </section>
+      <section id="problem" className="p-10 bg-[#EFF3F7]">
+        <div className="relative max-w-6xl mx-auto">
+          {/* Card */}
+          <div className="relative p-5 mt-10 bg-white rounded-lg shadow-lg">
+            <img
+              src={cards[activeIndex].image}
+              alt={cards[activeIndex].title}
+              className="w-full h-72 object-cover rounded-t-lg"
+            />
+            <div className="p-4">
+              <h3 className="text-xl font-bold text-gray-800">
+                {cards[activeIndex].title}
+              </h3>
+              <p className="text-gray-600">{cards[activeIndex].description}</p>
+            </div>
+          </div>
 
+          {/* Navigation Buttons */}
+          <div className="absolute inset-0 flex justify-between items-center px-4">
+            <button
+              onClick={handlePrev}
+              className="p-2 bg-gray-300 rounded-full hover:bg-gray-400 transition"
+            >
+              &#8592;
+            </button>
+            <button
+              onClick={handleNext}
+              className="p-2 bg-gray-300 rounded-full hover:bg-gray-400 transition"
+            >
+              &#8594;
+            </button>
+          </div>
+        </div>
+      </section>
       {/* Other Sections (unchanged) */}
       <section
         id="offering"

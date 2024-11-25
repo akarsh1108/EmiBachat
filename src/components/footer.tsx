@@ -1,27 +1,34 @@
 import React from "react";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 function Footer() {
   return (
     <footer className="p-5 bg-gray-800 shadow-md flex justify-between items-center">
       <p className="text-white">@2024</p>
-      <div className="space-x-5">
+      <div className="flex space-x-5 text-white">
         <a
           href="https://instagram.com"
-          className="hover:text-blue-500 text-white"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-400 transition-colors"
         >
-          Instagram
+          <FaInstagram className="text-lg" />
         </a>
         <a
           href="https://facebook.com"
-          className="hover:text-blue-500 text-white"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-400 transition-colors"
         >
-          Facebook
+          <FaFacebookF className="text-lg" />
         </a>
         <a
           href="https://twitter.com"
-          className="hover:text-blue-500 text-white"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-400 transition-colors"
         >
-          Twitter
+          <FaTwitter className="text-lg" />
         </a>
       </div>
     </footer>
