@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 
 export default function PersonalProfilePage() {
   const [formData, setFormData] = useState({
+    profilePhoto: "",
     firstName: "",
     middleName: "",
     lastName: "",
@@ -15,9 +16,21 @@ export default function PersonalProfilePage() {
     pincode: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]; // Safely access the first file
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        profilePhoto: URL.createObjectURL(file),
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,6 +44,37 @@ export default function PersonalProfilePage() {
         <h3 className="text-3xl font-bold mb-8">Profile Page</h3>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Profile Photo Upload */}
+          <div className="flex flex-col items-center space-y-4">
+            <div className="relative w-32 h-32">
+              <img
+                src={
+                  formData.profilePhoto ||
+                  "https://via.placeholder.com/150/000000/FFFFFF/?text=Upload"
+                }
+                alt="Profile"
+                className="w-32 h-32 rounded-full object-cover border border-gray-300"
+              />
+              <label
+                htmlFor="profilePhoto"
+                className="absolute bottom-0 right-0 bg-gray-800 text-white p-2 rounded-full cursor-pointer hover:bg-gray-700"
+              >
+                +
+              </label>
+              <input
+                id="profilePhoto"
+                type="file"
+                name="profilePhoto"
+                accept="image/*"
+                onChange={handlePhotoUpload}
+                className="hidden"
+              />
+            </div>
+            <Label htmlFor="profilePhoto" className="text-sm text-gray-600">
+              Upload Profile Photo
+            </Label>
+          </div>
+
           {/* Row 1: First Name, Middle Name, Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
@@ -135,7 +179,7 @@ export default function PersonalProfilePage() {
           <div className="flex justify-end">
             <Button
               type="submit"
-              className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700"
             >
               Next
             </Button>

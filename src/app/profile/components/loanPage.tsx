@@ -269,7 +269,7 @@ export default function LoanPage() {
           <div className="flex justify-end mt-6">
             <Button
               type="submit"
-              className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700"
             >
               Submit All Loans
             </Button>
