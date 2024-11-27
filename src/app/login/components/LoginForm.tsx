@@ -25,6 +25,7 @@ export default function LoginForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
+
     if (response.ok) {
       console.log("Registration successful");
     } else {
@@ -39,7 +40,7 @@ export default function LoginForm() {
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md space-y-6"
       >
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
-          Create an Account
+          Login to an Account
         </h1>
 
         {/* Email Field */}
