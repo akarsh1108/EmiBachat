@@ -62,6 +62,39 @@ export default function LoanSummaryPage() {
     return loan.emi * totalMonths - loan.principal;
   };
 
+  const calculateAmountPaid = (loan: (typeof loanData)[0]) => {
+    const monthsPaid =
+      (new Date().getTime() - new Date(loan.startDate).getTime()) /
+      (1000 * 60 * 60 * 24 * 30);
+    return Math.min(monthsPaid * loan.emi, loan.emi * 240);
+  };
+
+  const calculateAmountYetToBePaid = (loan: (typeof loanData)[0]) => {
+    return (
+      loan.principal + calculateTotalInterest(loan) - calculateAmountPaid(loan)
+    );
+  };
+
+  const totalLoanAmount = loanData.reduce(
+    (acc, loan) => acc + loan.principal,
+    0
+  );
+
+  const totalInterestAmount = loanData.reduce(
+    (acc, loan) => acc + calculateTotalInterest(loan),
+    0
+  );
+
+  const totalAmountPaid = loanData.reduce(
+    (acc, loan) => acc + calculateAmountPaid(loan),
+    0
+  );
+
+  const totalAmountYetToBePaid = loanData.reduce(
+    (acc, loan) => acc + calculateAmountYetToBePaid(loan),
+    0
+  );
+
   const calculateNewEMI = (loan: (typeof loanData)[0], newRate: number) => {
     const remainingMonths =
       (new Date(loan.endDate).getTime() - new Date().getTime()) /
@@ -101,6 +134,38 @@ export default function LoanSummaryPage() {
   return (
     <div className="px-10 py-8 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-center">Loan Summary</h1>
+
+      {/* Total Loan Summary Section */}
+      <section className="mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow-md text-center">
+            <h2 className="text-xl font-semibold mb-4">Total Loan Amount</h2>
+            <p className="text-2xl font-bold text-gray-700">
+              ₹{totalLoanAmount.toLocaleString()}
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md text-center">
+            <h2 className="text-xl font-semibold mb-4">Total Interest</h2>
+            <p className="text-2xl font-bold text-gray-700">
+              ₹{totalInterestAmount.toLocaleString()}
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md text-center">
+            <h2 className="text-xl font-semibold mb-4">Amount Paid Till Now</h2>
+            <p className="text-2xl font-bold text-gray-700">
+              ₹{totalAmountPaid.toLocaleString()}
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md text-center">
+            <h2 className="text-xl font-semibold mb-4">
+              Amount Yet to Be Paid
+            </h2>
+            <p className="text-2xl font-bold text-gray-700">
+              ₹{totalAmountYetToBePaid.toLocaleString()}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Loan Selection Section */}
       <section className="mb-10">
@@ -153,10 +218,6 @@ export default function LoanSummaryPage() {
             <p>
               <strong>Last Revision Date:</strong>{" "}
               {selectedLoan.lastRevisionDate}
-            </p>
-            <p>
-              <strong>Total Interest:</strong> ₹
-              {calculateTotalInterest(selectedLoan).toLocaleString()}
             </p>
           </div>
         </section>
