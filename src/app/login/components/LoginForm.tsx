@@ -1,10 +1,15 @@
 "use client";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -32,6 +37,38 @@ export default function LoginForm() {
       console.error("Registration failed");
     }
   };
+
+  useEffect(() => {
+    if (session) {
+      router.push("/home"); // Redirect to the home page
+    }
+  }, [session, router]);
+
+  // if (session && session.user) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  //       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md space-y-6">
+  //         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+  //           Welcome back, {session.user.email}
+  //         </h1>
+  //         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+  //           Welcome back, {session.user.name}
+  //         </h1>
+  //         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+  //           Welcome back, {session.user.image}
+  //         </h1>
+  //         <Button
+  //           onClick={async () => {
+  //             await signOut();
+  //           }}
+  //           className="w-full py-3 bg-red-500 text-white rounded-md hover:bg-red-600 transition-all"
+  //         >
+  //           Logout
+  //         </Button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -88,6 +125,7 @@ export default function LoginForm() {
         >
           Login
         </Button>
+
         {/* More Options Section */}
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
@@ -101,7 +139,10 @@ export default function LoginForm() {
         {/* Google Sign-In Button */}
         <Button
           type="button"
-          className="w-full py-3 text-white rounded-md  transition-all flex items-center justify-center"
+          className="w-full py-3 text-white rounded-md transition-all flex items-center justify-center"
+          onClick={async () => {
+            await signIn("google", { redirect: false });
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +170,7 @@ export default function LoginForm() {
         </Button>
 
         <p className="text-sm text-center text-gray-500 mt-4">
-          Don`&apos;`t have an account?{" "}
+          Don&apos;t have an account?{" "}
           <a href="/register" className="text-blue-500 hover:underline">
             Register
           </a>

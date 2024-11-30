@@ -62,6 +62,12 @@ export default function LoanPage() {
     ]);
   };
 
+  const deleteLoan = (index: number) => {
+    if (loans.length > 1) {
+      setLoans((prev) => prev.filter((_, i) => i !== index));
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form Data:", loans);
@@ -69,19 +75,38 @@ export default function LoanPage() {
 
   return (
     <div className="flex">
-      <div className="flex-1 px-10 py-8 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-8">Loan Details</h1>
+      <div className="flex-1 px-12 py-10">
+        {/* Title */}
+        <h1 className="text-4xl font-bold text-gray-800 mb-10">Loan Details</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-8">
           {loans.map((loan, index) => (
             <div
               key={index}
-              className="p-4 bg-white shadow-md rounded-md space-y-4"
+              className="p-6 shadow-lg rounded-lg space-y-6 border border-gray-200"
             >
-              <h2 className="text-lg font-bold mb-4">Loan {index + 1}</h2>
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-semibold text-gray-700">
+                  Loan {index + 1}
+                </h2>
+                {loans.length > 1 && (
+                  <Button
+                    type="button"
+                    onClick={() => deleteLoan(index)}
+                    className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                  >
+                    Delete
+                  </Button>
+                )}
+              </div>
+
               {/* Dropdown for Bank */}
               <div>
-                <Label htmlFor={`bank-${index}`} className="block mb-2">
+                <Label
+                  htmlFor={`bank-${index}`}
+                  className="block mb-2 text-sm font-medium text-gray-600"
+                >
                   1. Which Bank
                 </Label>
                 <select
@@ -90,7 +115,7 @@ export default function LoanPage() {
                   value={loan.bank}
                   onChange={(e) => handleInputChange(index, e)}
                   required
-                  className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 bg-gray-50"
                 >
                   <option value="" disabled>
                     Select a Bank
@@ -109,14 +134,17 @@ export default function LoanPage() {
                     value={loan.otherBank}
                     onChange={(e) => handleInputChange(index, e)}
                     required
-                    className="w-full mt-4"
+                    className="w-full mt-4 p-3 border rounded-md bg-gray-50"
                   />
                 )}
               </div>
 
               {/* Dropdown for Loan Type */}
               <div>
-                <Label htmlFor={`loanType-${index}`} className="block mb-2">
+                <Label
+                  htmlFor={`loanType-${index}`}
+                  className="block mb-2 text-sm font-medium text-gray-600"
+                >
                   2. Which Type of Loan
                 </Label>
                 <select
@@ -125,7 +153,7 @@ export default function LoanPage() {
                   value={loan.loanType}
                   onChange={(e) => handleInputChange(index, e)}
                   required
-                  className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 bg-gray-50"
                 >
                   <option value="" disabled>
                     Select a Loan Type
@@ -144,7 +172,7 @@ export default function LoanPage() {
                     value={loan.otherLoanType}
                     onChange={(e) => handleInputChange(index, e)}
                     required
-                    className="w-full mt-4"
+                    className="w-full mt-4 p-3 border rounded-md bg-gray-50"
                   />
                 )}
               </div>
@@ -154,7 +182,7 @@ export default function LoanPage() {
                 <div>
                   <Label
                     htmlFor={`loanStartDate-${index}`}
-                    className="block mb-2"
+                    className="block mb-2 text-sm font-medium text-gray-600"
                   >
                     3. Loan Start Date
                   </Label>
@@ -165,13 +193,13 @@ export default function LoanPage() {
                     value={loan.loanStartDate}
                     onChange={(e) => handleInputChange(index, e)}
                     required
-                    className="w-full"
+                    className="w-full p-3 border rounded-md bg-gray-50"
                   />
                 </div>
                 <div>
                   <Label
                     htmlFor={`loanEndDate-${index}`}
-                    className="block mb-2"
+                    className="block mb-2 text-sm font-medium text-gray-600"
                   >
                     Loan End Date
                   </Label>
@@ -182,14 +210,17 @@ export default function LoanPage() {
                     value={loan.loanEndDate}
                     onChange={(e) => handleInputChange(index, e)}
                     required
-                    className="w-full"
+                    className="w-full p-3 border rounded-md bg-gray-50"
                   />
                 </div>
               </div>
 
               {/* Loan Amount */}
               <div>
-                <Label htmlFor={`loanAmount-${index}`} className="block mb-2">
+                <Label
+                  htmlFor={`loanAmount-${index}`}
+                  className="block mb-2 text-sm font-medium text-gray-600"
+                >
                   4. Amount of Loan
                 </Label>
                 <Input
@@ -200,17 +231,17 @@ export default function LoanPage() {
                   value={loan.loanAmount}
                   onChange={(e) => handleInputChange(index, e)}
                   required
-                  className="w-full"
+                  className="w-full p-3 border rounded-md bg-gray-50"
                 />
               </div>
 
               {/* Fixed vs Variable Rate of Interest */}
               <div>
-                <Label className="block mb-2">
+                <Label className="block mb-2 text-sm font-medium text-gray-600">
                   5. Fixed vs Variable Rate of Interest
                 </Label>
                 <div className="flex gap-4">
-                  <label className="flex items-center gap-2">
+                  <label className="flex items-center gap-2 text-sm text-gray-600">
                     <input
                       type="radio"
                       name={`rateType-${index}`}
@@ -222,7 +253,7 @@ export default function LoanPage() {
                     />
                     Fixed
                   </label>
-                  <label className="flex items-center gap-2">
+                  <label className="flex items-center gap-2 text-sm text-gray-600">
                     <input
                       type="radio"
                       name={`rateType-${index}`}
@@ -239,7 +270,10 @@ export default function LoanPage() {
 
               {/* EMI Amount */}
               <div>
-                <Label htmlFor={`emiAmount-${index}`} className="block mb-2">
+                <Label
+                  htmlFor={`emiAmount-${index}`}
+                  className="block mb-2 text-sm font-medium text-gray-600"
+                >
                   7. EMI Amount
                 </Label>
                 <Input
@@ -250,7 +284,7 @@ export default function LoanPage() {
                   value={loan.emiAmount}
                   onChange={(e) => handleInputChange(index, e)}
                   required
-                  className="w-full"
+                  className="w-full p-3 border rounded-md bg-gray-50"
                 />
               </div>
             </div>
@@ -266,7 +300,7 @@ export default function LoanPage() {
           </Button>
 
           {/* Submit Button */}
-          <div className="flex justify-end mt-6">
+          <div className="flex justify-end mt-8">
             <Button
               type="submit"
               className="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700"

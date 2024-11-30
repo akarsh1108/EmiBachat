@@ -40,8 +40,8 @@ const loanData = [
     endDate: "2043-01-01",
     underlineRate: 8,
     lastRevisionDate: "2023-07-01",
-    emiTrend: [8000, 8200, 8400, 8334],
-    interestRateTrend: [7.5, 7.7, 7.9, 8.0],
+    emiTrend: [8000, 8050, 8400, 8334],
+    interestRateTrend: [7.5, 7.6, 7.9, 8.0],
     tenureMonths: 240,
   },
   {
@@ -259,8 +259,7 @@ export default function LoanSummaryPage() {
     <div className="p-10 bg-gray-100 min-h-screen">
       {/* Header Section */}
       <header className="mb-10">
-        <h1 className="text-3xl font-bold">Welcome, User!</h1>
-        <p className="text-gray-500 mt-2">
+        <p className="text-gray-500 ">
           Your next payment of <span className="text-black">₹10,834</span> is
           scheduled for{" "}
           <span className="text-black font-medium">Oct 30, 2023</span>.

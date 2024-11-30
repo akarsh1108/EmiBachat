@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { FaHome, FaFileAlt } from "react-icons/fa";
 import { Menu } from "@headlessui/react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function Sidebar() {
   const [currentRoute, setCurrentRoute] = useState("");
-
+  const { data: session } = useSession();
   useEffect(() => {
     // Set the current route using window.location
     setCurrentRoute(window.location.pathname);
@@ -47,15 +49,31 @@ export default function Sidebar() {
         <Menu as="div" className="relative">
           <Menu.Button className="flex items-center w-full px-2 py-2 text-left hover:bg-gray-800 rounded-md">
             <Image
-              src="/images/avatar/confident.png"
+              src={
+                session && session.user?.image
+                  ? session.user.image
+                  : "/images/avatar/confident.png"
+              }
               alt="Profile"
               width={32}
               height={32}
               className="rounded-full"
             />
             <div className="ml-3">
-              <p className="text-sm font-medium">shadcn</p>
-              <p className="text-xs text-gray-400">m@example.com</p>
+              <p className="text-sm font-medium">
+                {session
+                  ? (session.user?.name?.length ?? 0) > 10
+                    ? session.user?.name?.substring(0, 10) + "..."
+                    : session.user?.name
+                  : "chadcn"}
+              </p>
+              <p className="text-xs text-gray-400">
+                {session
+                  ? (session.user?.email?.length ?? 0) > 15
+                    ? session.user?.email?.substring(0, 10) + "..."
+                    : session.user?.email
+                  : "chadcn@gmail.com"}
+              </p>
             </div>
             <svg
               className="w-5 h-5 ml-auto text-gray-400"
@@ -87,14 +105,16 @@ export default function Sidebar() {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="/logout"
+                <button
                   className={`block px-4 py-2 ${
                     active ? "bg-gray-700 text-white" : "text-gray-300"
                   }`}
+                  onClick={() => {
+                    signOut({ callbackUrl: "/login" });
+                  }}
                 >
                   Logout
-                </a>
+                </button>
               )}
             </Menu.Item>
           </Menu.Items>
